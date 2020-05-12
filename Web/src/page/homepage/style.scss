@@ -1,0 +1,47 @@
+#components-layout-demo-fixed .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+#order-list {
+    .list {
+        padding-bottom: 20px;
+        min-height: 400px;
+        background-color: #fff;
+        position: relative;
+
+        .ant-empty {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+        }
+
+        .create-date {
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .price {
+            float: right;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .content {
+            font-size: 16px;
+        }
+    }
+}
+
+.wrap-text {
+    white-space: pre-wrap;
+    max-height: 200px;
+}
