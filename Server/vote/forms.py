@@ -60,7 +60,7 @@ class AddVoteOptionForm(Form):
         error_messages={
             'min_length': '选项描述必须在2~20字之间',
             'max_length': '选项描述必须在2~20字之间',
-            'require': '选项描述必须在2~20字之间'
+            'required': '选项描述必须在2~20字之间'
         }
     )
 
@@ -74,7 +74,7 @@ class VoteForm(Form):
         error_messages={
             'min_length': 'QQ号错误',
             'max_length': 'QQ号错误',
-            'require': '需要填写QQ号'
+            'required': '需要填写QQ号'
         }
     )
     # 数据格式【投票选项id,分数|投票选项id,分数|投票选项id,分数】
@@ -85,5 +85,6 @@ class VoteForm(Form):
                             ],
                             error_messages={
                                 'max_length': '评分数据错误',
+                                'required': '需要填写QQ号'
                             }
                             )

@@ -16,7 +16,7 @@ import {
 
 const {Header, Content, Footer} = Layout;
 
-// window.options = [{'id': 1, 'option': '\u5b9e\u6218\uff08\u524d\u7aef\uff09', 'score': 0, 'vote_people': 0}]
+window.vote_options = window.vote_options || [{'id': 0, 'option': '测试', 'score': 0, 'vote_people': 0}]
 
 class Root extends React.Component {
     state = {
@@ -184,7 +184,9 @@ class Root extends React.Component {
                 return;
             }
             total += s
-            list.push(`${item.id},${s}`)
+            if (s > 0) {
+                list.push(`${item.id},${s}`)
+            }
         })
         if (isOverOneMax) {
             return alert('单项分数不能超过10分，并且只能是大于等于0的正整数整数')
