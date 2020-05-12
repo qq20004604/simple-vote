@@ -16,11 +16,11 @@ import {
 
 const {Header, Content, Footer} = Layout;
 
-window.options = [{'id': 1, 'option': '\u5b9e\u6218\uff08\u524d\u7aef\uff09', 'score': 0, 'vote_people': 0}]
+// window.options = [{'id': 1, 'option': '\u5b9e\u6218\uff08\u524d\u7aef\uff09', 'score': 0, 'vote_people': 0}]
 
 class Root extends React.Component {
     state = {
-        options: window.options.map(item => {
+        options: window.vote_options.map(item => {
             return Object.assign({}, item, {
                 myScore: 0
             }) || []
@@ -78,7 +78,8 @@ class Root extends React.Component {
                                 当前总计选择：
                                 <span style={{color: select > 5 ? 'red' : '#333'}}>{select}</span> 项
                             </p>
-                            <Form.Item label={'请输入你的QQ号'}
+                            <Form.Item label={'请输入你的QQ号（必填）'}
+                                       rules={[{required: true}]}
                                        labelCol={{
                                            span: 4
                                        }}>
@@ -122,7 +123,7 @@ class Root extends React.Component {
                                            onChange={e => this.changeMyOption(e.target.value)}/>
                                     <Button type="primary"
                                             style={{marginLeft: '20px'}}
-                                            onClick={this.vote}>新增自定义选项</Button>
+                                            onClick={this.addOption}>新增自定义选项</Button>
                                 </Form.Item>
                                 <Button type="primary"
                                         style={{marginLeft: '20px'}}
