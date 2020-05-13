@@ -9,7 +9,7 @@ from bulk_update.helper import bulk_update
 
 # Create your views here.
 def index(request):
-    list = VoteOptions.objects.all()
+    list = VoteOptions.objects.order_by('-score')
     result = [
         {
             'id': item.id,
