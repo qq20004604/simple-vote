@@ -55,12 +55,19 @@ def validate_even(value):
 class AddVoteOptionForm(Form):
     option = forms.CharField(
         min_length=2,
-        max_length=20,
+        max_length=255,
         required=True,
         error_messages={
-            'min_length': '选项描述必须在2~20字之间',
-            'max_length': '选项描述必须在2~20字之间',
-            'required': '选项描述必须在2~20字之间'
+            'min_length': '选项描述必须在2~255字之间',
+            'max_length': '选项描述必须在2~255字之间',
+            'required': '选项描述必须在2~255字之间'
+        }
+    )
+    vote_id = forms.IntegerField(
+        required=True,
+        help_text='问卷编号',
+        error_messages={
+            'required': '需要填写问卷编号'
         }
     )
 
@@ -88,3 +95,31 @@ class VoteForm(Form):
                                 'required': '需要填写QQ号'
                             }
                             )
+    vote_id = forms.IntegerField(
+        required=True,
+        help_text='问卷编号',
+        error_messages={
+            'required': '需要填写问卷编号'
+        }
+    )
+
+
+# 添加投票选项
+class AddVoteUserForm(Form):
+    qq = forms.CharField(
+        min_length=6,
+        max_length=14,
+        required=True,
+        error_messages={
+            'min_length': 'QQ号错误',
+            'max_length': 'QQ号错误',
+            'required': '需要填写QQ号'
+        }
+    )
+    vote_id = forms.IntegerField(
+        required=True,
+        help_text='问卷编号',
+        error_messages={
+            'required': '需要填写问卷编号'
+        }
+    )

@@ -9,4 +9,6 @@ urlpatterns = [
     path('vote_add_option/', views.vote_add_option, name='vote_add_option'),
     # 投票
     path('vote/', views.vote, name='vote'),
+    # 添加投票人
+    path('add_user/', views.add_user, name='add_user')
 ]

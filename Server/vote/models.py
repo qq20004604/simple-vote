@@ -25,6 +25,10 @@ class User(models.Model):
         max_length=255,
         help_text='投票行为，数据格式为【投票选项id,分数|投票选项id,分数|投票选项id,分数】这样'
     )
+    vote_id = models.IntegerField(
+        default=0,
+        help_text='问卷编号'
+    )
 
     def vote(self, action):
         self.has_voted = '1'
@@ -34,9 +38,8 @@ class User(models.Model):
 # 投票选项
 class VoteOptions(models.Model):
     option = models.CharField(
-        max_length=20,
-        help_text='选项文字内容',
-        unique=True
+        max_length=255,
+        help_text='选项文字内容'
     )
     score = models.IntegerField(
         default=0,
@@ -45,4 +48,8 @@ class VoteOptions(models.Model):
     vote_people = models.IntegerField(
         default=0,
         help_text='投票人数'
+    )
+    vote_id = models.IntegerField(
+        default=0,
+        help_text='问卷编号'
     )

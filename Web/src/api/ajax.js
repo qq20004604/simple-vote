@@ -11,6 +11,9 @@ const $ajax = {
     addOption (payload) {
         return post('/vote_add_option/', payload);
     },
+    addUser (payload) {
+        return post('/add_user/', payload);
+    },
     vote (payload) {
         return post('/vote/', payload);
     }

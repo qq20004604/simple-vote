@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import 'common/css/reset.css';
 import './style.scss';
 import 'antd/dist/antd.css';
+import AddUser from './add_user';
 import $ajax from 'api/ajax.js';
 import {
     Layout, Menu,
@@ -15,8 +16,11 @@ import {
 } from 'antd';
 
 const {Header, Content, Footer} = Layout;
+const {TextArea} = Input;
 
 window.vote_options = window.vote_options || [{'id': 0, 'option': '测试', 'score': 0, 'vote_people': 0}]
+
+const voteId = window.voteId || '1';
 
 class Root extends React.Component {
     state = {
@@ -26,6 +30,8 @@ class Root extends React.Component {
             }) || []
         }),
 
+        voteId: voteId,
+        isShowAddUser: window.location.search.indexOf('add_user') > -1,
         myOption: '',
         qq: ''
     };
@@ -70,6 +76,9 @@ class Root extends React.Component {
                                 ]}
                                 renderItem={item => <List.Item>{item}</List.Item>}
                             />
+                            {
+                                this.state.isShowAddUser ? <AddUser voteId={this.state.voteId}/> : null
+                            }
                             <p>
                                 当前总分：
                                 <span style={{color: total > 30 ? 'red' : '#333'}}>{total}</span>
@@ -115,12 +124,12 @@ class Root extends React.Component {
                                            labelCol={{
                                                span: 4
                                            }}>
-                                    <Input placeholder="请输入选项描述（2~20字）"
-                                           value={this.state.myOption}
-                                           style={{
-                                               width: '200px'
-                                           }}
-                                           onChange={e => this.changeMyOption(e.target.value)}/>
+                                    <TextArea placeholder="请输入选项描述（2~255字）"
+                                              value={this.state.myOption}
+                                              style={{
+                                                  width: '200px'
+                                              }}
+                                              onChange={e => this.changeMyOption(e.target.value)}/>
                                     <Button type="primary"
                                             style={{marginLeft: '20px'}}
                                             onClick={this.addOption}>新增自定义选项</Button>
@@ -159,7 +168,8 @@ class Root extends React.Component {
 
     addOption = () => {
         $ajax.addOption({
-            option: this.state.myOption
+            option: this.state.myOption,
+            vote_id: this.state.voteId
         }).then(result => {
             console.log(result)
             if (result.code === 200) {
@@ -201,7 +211,8 @@ class Root extends React.Component {
 
         $ajax.vote({
             qq: this.state.qq,
-            score: list.join('|')
+            score: list.join('|'),
+            vote_id: this.state.voteId
         }).then(result => {
             console.log(result)
             if (result.code === 200) {
